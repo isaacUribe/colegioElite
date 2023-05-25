@@ -1,18 +1,31 @@
 package com.example.colegioElite.entidades;
 
-public class Profesor {
+import jakarta.persistence.*;
 
+import java.util.List;
+
+@Entity
+@Table(name = "profesores")
+public class Profesor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(nullable = false, length = 50)
     private String nombre;
+    @Column(nullable = false, length = 50)
     private Integer escalafon;
+
+    @OneToMany(mappedBy = "profesor")
+    private List<Materia> materias;
 
     public Profesor() {
     }
 
-    public Profesor(Integer id, String nombre, Integer escalafon) {
+    public Profesor(Integer id, String nombre, Integer escalafon, List<Materia> materias) {
         this.id = id;
         this.nombre = nombre;
         this.escalafon = escalafon;
+        this.materias = materias;
     }
 
     public Integer getId() {
@@ -37,5 +50,13 @@ public class Profesor {
 
     public void setEscalafon(Integer escalafon) {
         this.escalafon = escalafon;
+    }
+
+    public List<Materia> getMaterias() {
+        return materias;
+    }
+
+    public void setMaterias(List<Materia> materias) {
+        this.materias = materias;
     }
 }

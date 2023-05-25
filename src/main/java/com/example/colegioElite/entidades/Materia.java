@@ -11,15 +11,21 @@ public class Materia {
     private Integer id;
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
+    @Column(nullable = false)
     private Integer numeroCreditos;
+
+    @ManyToOne
+    @JoinColumn(name = "id_profesor")
+    private Profesor profesor;
 
     public Materia() {
     }
 
-    public Materia(Integer id, String nombre, Integer numeroCreditos) {
+    public Materia(Integer id, String nombre, Integer numeroCreditos, Profesor profesor) {
         this.id = id;
         this.nombre = nombre;
         this.numeroCreditos = numeroCreditos;
+        this.profesor = profesor;
     }
 
     public Integer getId() {
@@ -44,5 +50,13 @@ public class Materia {
 
     public void setNumeroCreditos(Integer numeroCreditos) {
         this.numeroCreditos = numeroCreditos;
+    }
+
+    public Profesor getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
     }
 }
